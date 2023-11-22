@@ -1,0 +1,62 @@
+Pulling down images on Docker
+	- Make sure docker engine is running on your computer
+	- Run this command 
+		○ Docker pull <image name>  //Remember images are librarys that help applications run
+
+CLI breakdown:
+
+docker run -d -p 9000:80 nginx:latest
+
+	Docker run will start a container
+
+	-d means run in damion mode ==> run in background. If you don’t do this you cannot use your terminal while it runs. You will have to wait till its done.
+
+	-p is for port mapping. Port mappings are for network connections
+
+	Nginx means container image 
+
+	Lastest means the version
+
+Docker ps will show you all the running containers
+Ps aux will show you all the running processes on a linux machine
+
+
+Curl http:localhost:9000. this will test container in the command line
+
+Docker stop  <container id> will shutdown that specific container. This does not remove the container it just stops it. 
+
+Docker ps -a will show both stopped and running containers
+
+Docker start <container id> will restart container
+
+To write 2 commands together use &&. Example is. Docker stop <container id> && docker rm <container id>
+
+Docker ps -aq.     // this shows only the container ID. This can be useful when you want to combine multiple line of codes.
+
+Docker stop $(docker ps -aq)
+
+Docker containers are only meant to run for the duration that they are needed.
+
+Docker logs <container id> this shows what was actually ran
+
+# Interactive mode
+docker run - it ubuntu:20.04 bash
+	- We use this to go inside a container to mainly for trouble shooting.
+	- In this mode you can 'cd' into different folders in the application 
+
+# Non-interactive mode
+Docker run -d -it ubuntu:20.04 bash
+
+# How to attach?
+## This works, but not the best way
+docker attach <container id>
+
+## This is better, starts a second bash shell on the container.
+docker exec -it <container id> bash        //exec means execute
+
+Using the docker exec allows you to run commands without going into the container. For example
+docker exec -it <container id> bash ls or
+docker exec -it <container id> bash pwd    
+
+docker logs <container id>
+
